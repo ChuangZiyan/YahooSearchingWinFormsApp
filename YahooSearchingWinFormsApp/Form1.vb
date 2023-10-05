@@ -203,7 +203,7 @@ Public Class Form1
 
 
     Public Shared Function FindEmails(input As String) As List(Of String)
-        Dim emailPattern As String = "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+        Dim emailPattern As String = "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:\b|\s|\.|[,;!])"
         Dim regex As New Regex(emailPattern)
         Dim matches As MatchCollection = regex.Matches(input)
         Dim emails As New List(Of String)
