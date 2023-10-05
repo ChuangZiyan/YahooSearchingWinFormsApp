@@ -88,8 +88,14 @@ Public Class Form1
             SearchingContent_TextBox.Text = kword
             Line_Number_NumericUpDown.Value = my_counter + 1
 
+            Dim curr_searching_page = 0
+            Dim page_sum = Max_Searching_Page_Limit_NumericUpDown.Value
+
             'Debug.WriteLine(kword)
             For start = 1 To Max_Searching_Page_Limit_NumericUpDown.Value * 7 - 1 Step 7
+                curr_searching_page += 1
+                page_sum -= 1
+                Curr_Searching_Page_Label.Text = "正在搜尋第 " & curr_searching_page & " 頁，剩餘 " & page_sum & " 頁"
 
                 While PAUSE_FLAG
                     'Debug.WriteLine("PAUSE")
