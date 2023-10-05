@@ -58,6 +58,9 @@ Public Class Form1
     End Sub
 
     Private Async Sub Start_Searching_Button_Click(sender As Object, e As EventArgs) Handles Start_Searching_Button.Click
+
+
+
         Start_Searching_Button.Enabled = False
         Pause_Button.Enabled = True
         Pause_Button.Text = "暫停"
@@ -168,7 +171,7 @@ Public Class Form1
 
     Public Async Function Submit_Get_Yahoo_Searching_Result_Html(keyword As String, start As Integer) As Task(Of String)
 
-        Dim apiUrl As String = "https://search.yahoo.com/search?p=" + "%40 " + keyword + " EMAIL HK&b=" & start
+        Dim apiUrl As String = "https://search.yahoo.com/search?p=" + "%40" + keyword + " EMAIL HK&b=" & start
 
         Debug.WriteLine(apiUrl)
 
@@ -185,8 +188,11 @@ Public Class Form1
                 If response.IsSuccessStatusCode Then
                     Dim responseBody As String = Await response.Content.ReadAsStringAsync()
                     Debug.WriteLine("############ responseBody: ############### ")
-                    'Debug.WriteLine(responseBody)
-                    Return responseBody
+                    Debug.WriteLine(responseBody)
+                    Dim pattern As String = "<b>(.*?)</b>"
+                    Dim cleanText As String = Regex.Replace(responseBody, pattern, "$1")
+                    Debug.WriteLine(cleanText)
+                    Return cleanText
                 Else
                     Debug.WriteLine("http status code : " & response.StatusCode)
                     'MsgBox("Http Status Code : " & response.StatusCode)
