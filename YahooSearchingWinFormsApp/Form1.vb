@@ -85,7 +85,7 @@ Public Class Form1
         Dim my_counter = 0
 
         For Each kword In keyword_list
-            result_filePath = searchingResultDir + "\SearchingResult_" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt"
+
             Message_RichTextBox.Clear()
 
             'EventLog_ListBox.Items.Add(Now.ToString("yyyy-MM-dd HH:mm:ss") + " - 搜尋: " + kword + " 中")
@@ -98,6 +98,7 @@ Public Class Form1
 
             'Debug.WriteLine(kword)
             For start = 1 To Max_Searching_Page_Limit_NumericUpDown.Value * 7 - 1 Step 7
+                result_filePath = searchingResultDir + "\SearchingResult_" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt"
                 curr_searching_page += 1
                 page_sum -= 1
                 Curr_Searching_Page_Label.Text = "正在搜尋第 " & curr_searching_page & " 頁，剩餘 " & page_sum & " 頁"
@@ -190,10 +191,10 @@ Public Class Form1
                 If response.IsSuccessStatusCode Then
                     Dim responseBody As String = Await response.Content.ReadAsStringAsync()
                     Debug.WriteLine("############ responseBody: ############### ")
-                    Debug.WriteLine(responseBody)
+                    'Debug.WriteLine(responseBody)
                     Dim pattern As String = "<b>(.*?)</b>"
                     Dim cleanText As String = Regex.Replace(responseBody, pattern, "$1")
-                    Debug.WriteLine(cleanText)
+                    'Debug.WriteLine(cleanText)
                     Return cleanText
                 Else
                     Debug.WriteLine("http status code : " & response.StatusCode)
