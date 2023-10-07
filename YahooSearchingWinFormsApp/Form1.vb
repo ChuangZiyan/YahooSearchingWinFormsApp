@@ -69,7 +69,8 @@ Public Class Form1
         Start_Time_TextBox.Text = Now.ToString("G")
         End_Time_TextBox.Text = ""
 
-        Dim result_filePath As String = searchingResultDir + "\SearchingResult_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".txt"
+        'Dim result_filePath As String = searchingResultDir + "\SearchingResult_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".txt"
+        Dim result_filePath As String = searchingResultDir + "\SearchingResult_" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt"
         File.Create(result_filePath).Dispose()
 
         Dim keyword_list As New List(Of String)
@@ -84,6 +85,7 @@ Public Class Form1
         Dim my_counter = 0
 
         For Each kword In keyword_list
+            result_filePath = searchingResultDir + "\SearchingResult_" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt"
             Message_RichTextBox.Clear()
 
             'EventLog_ListBox.Items.Add(Now.ToString("yyyy-MM-dd HH:mm:ss") + " - 搜尋: " + kword + " 中")
