@@ -71,7 +71,7 @@ Public Class Form1
 
         'Dim result_filePath As String = searchingResultDir + "\SearchingResult_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".txt"
         Dim result_filePath As String = searchingResultDir + "\SearchingResult_" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt"
-        File.Create(result_filePath).Dispose()
+        'File.Create(result_filePath).Dispose()
 
         Dim keyword_list As New List(Of String)
 
@@ -232,6 +232,11 @@ Public Class Form1
 
 
     Public Function CheckEmailExistInFile(file_path As String, email_str As String) As Boolean
+
+        If Not File.Exists(file_path) Then
+            Return False
+        End If
+
 
         Using reader As New StreamReader(file_path)
 
